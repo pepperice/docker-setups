@@ -1,0 +1,26 @@
+version: '3'
+services:
+    cakephp:
+        image: ubuntu-cakephp2
+        ports:
+            - "8080:80"
+        links:
+            - postgres
+        expose:
+            - 80
+        volumes:
+            - .:/var/www/html/
+    postgres:
+        image: postgres
+        ports:
+            - "5432:5432"
+        expose:
+            - 5432
+        volumes:
+            - db
+        environment:
+            POSTGRES_DB: "cakedb"
+            POSTGRES_USER: "docker"
+            POSTGRES_PASSWORD: "docker"     
+volumes:
+    db: {}
